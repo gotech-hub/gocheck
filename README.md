@@ -46,8 +46,22 @@ go get github.com/gotech-hub/gocheck
 ### Cài đặt CLI tool toàn cục:
 ```bash
 go install github.com/gotech-hub/gocheck@latest
+GOPROXY=direct GOSUMDB=off go install github.com/gotech-hub/gocheck@v1.0.4
 ```
 Sau khi cài đặt, bạn có thể chạy lệnh `gocheck` ở bất kỳ đâu (nếu `$GOPATH/bin` hoặc `$GOBIN` đã nằm trong biến môi trường `PATH`).
+
+## Prerequisites
+
+Before running `gocheck`, make sure you have the following tools installed:
+
+- [gosec](https://github.com/securego/gosec):
+  ```sh
+  go install github.com/securego/gosec/v2/cmd/gosec@latest
+  ```
+- [staticcheck](https://staticcheck.io/):
+  ```sh
+  go install honnef.co/go/tools/cmd/staticcheck@latest
+  ```
 
 ## Sử dụng
 ### Dùng như CLI

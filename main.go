@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"os/exec"
 
 	"github.com/gotech-hub/gocheck/analyzer"
 	"github.com/gotech-hub/gocheck/report"
@@ -56,6 +57,20 @@ func showHelp() {
 }
 
 func main() {
+	// Check for required tools
+	missingTools := []string{}
+	if _, err := exec.LookPath("gosec"); err != nil {
+		missingTools = append(missingTools, "gosec")
+	}
+	if _, err := exec.LookPath("staticcheck"); err != nil {
+		missingTools = append(missingTools, "staticcheck")
+	}
+	if len(missingTools) > 0 {
+		fmt.Printf("\u274c Error: The following required tools are missing: %v\n", missingTools)
+		fmt.Println("Please install them as described in the README before running gocheck.")
+		os.Exit(1)
+	}
+
 	var (
 		path    = flag.String("path", ".", "Path to scan")
 		html    = flag.Bool("html", true, "Generate HTML report")
