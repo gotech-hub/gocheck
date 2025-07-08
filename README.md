@@ -138,8 +138,6 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Liên hệ
 - [GitHub Issues](https://github.com/gotech-hub/gocheck/issues)
-- Email: contact@gotech-hub.com (nếu có)
-
 ---
 
-> Made with ❤️ by GoTech-Hub Team 
+> Made with by GoTech-Hub Team 
