@@ -18,7 +18,7 @@ go get github.com/gotech-hub/gocheck
 Bạn có thể cài đặt GoCheck như một công cụ dòng lệnh toàn cục bằng lệnh:
 
 ```bash
-go install github.com/gotech-hub/gocheck/cmd/gocheck@latest
+go install github.com/gotech-hub/gocheck@latest
 ```
 
 Sau khi cài đặt, bạn có thể chạy lệnh `gocheck` ở bất kỳ đâu (nếu `$GOPATH/bin` hoặc `$GOBIN` đã nằm trong biến môi trường `PATH`).
