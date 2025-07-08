@@ -1,9 +1,12 @@
 package analyzer
 
 import (
+	"encoding/json"
+	"fmt"
 	"go/ast"
 	"go/parser"
 	"go/token"
+	"os/exec"
 	"strings"
 )
 
@@ -81,5 +84,52 @@ func analyzePerformance(file string) []Finding {
 		return true
 	})
 
+	// --- Phần bổ sung: chạy analyzer ngoài (dùng go/analysis) ---
+	externalFindings := runExternalPerformanceAnalyzer(file)
+	results = append(results, externalFindings...)
+
 	return results
+}
+
+// runExternalPerformanceAnalyzer chạy một analyzer ngoài (giả lập bằng cách gọi một tool ngoài, ví dụ staticcheck, hoặc có thể thay bằng analyzer thực tế)
+func runExternalPerformanceAnalyzer(file string) []Finding {
+	cmd := exec.Command("staticcheck", "-f", "json", file)
+	output, err := cmd.Output()
+	if err != nil {
+		return nil // Nếu không có staticcheck hoặc lỗi, bỏ qua
+	}
+	type staticcheckIssue struct {
+		Code     string `json:"code"`
+		Severity string `json:"severity"`
+		Location struct {
+			File string `json:"file"`
+			Line int    `json:"line"`
+		} `json:"location"`
+		End struct {
+			Line int `json:"line"`
+		} `json:"end"`
+		Message string `json:"message"`
+	}
+	var issues []staticcheckIssue
+	err = json.Unmarshal(output, &issues)
+	if err != nil {
+		return nil
+	}
+	var findings []Finding
+	for _, issue := range issues {
+		sev := Low
+		if issue.Severity == "error" {
+			sev = High
+		} else if issue.Severity == "warning" {
+			sev = Medium
+		}
+		findings = append(findings, Finding{
+			File:       issue.Location.File,
+			Line:       issue.Location.Line,
+			Message:    fmt.Sprintf("[staticcheck][%s] %s", issue.Code, issue.Message),
+			Severity:   sev,
+			Suggestion: "Check staticcheck documentation for details.",
+		})
+	}
+	return findings
 }
