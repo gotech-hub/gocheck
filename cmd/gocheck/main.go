@@ -11,7 +11,7 @@ import (
 	"github.com/gotech-hub/gocheck/scanner"
 )
 
-const version = "gocheck v1.0.0"
+const version = "gocheck v1.0.1"
 
 // Scan quét mã nguồn Go trong path, sinh báo cáo HTML/JSON nếu được chọn.
 func Scan(path string, htmlOutput, jsonOutput bool) error {
