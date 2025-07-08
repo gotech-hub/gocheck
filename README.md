@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 <!-- [![Build Status](https://img.shields.io/github/actions/workflow/status/gotech-hub/gocheck/ci.yml?branch=main)](https://github.com/gotech-hub/gocheck/actions) -->
 
-![Screenshot](https://ibb.co/HLrZWTjy)
+![Screenshot](https://i.ibb.co/vCJ974SW/Screenshot-2025-07-08-at-16-20-32.png)
 
 > **English below | Tiếng Việt bên dưới**
 
