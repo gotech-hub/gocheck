@@ -10,18 +10,18 @@ import (
 
 func GenerateHTML(findings []analyzer.Finding) {
 	// Tính toán số lượng từng loại severity
-	stats := map[analyzer.Severity]int{
-		analyzer.Low:      0,
-		analyzer.Medium:   0,
-		analyzer.High:     0,
-		analyzer.Critical: 0,
+	stats := map[string]int{
+		"Low":      0,
+		"Medium":   0,
+		"High":     0,
+		"Critical": 0,
 	}
 	for _, f := range findings {
-		stats[f.Severity]++
+		stats[string(f.Severity)]++
 	}
 	type ReportData struct {
 		Findings            []analyzer.Finding
-		Stats               map[analyzer.Severity]int
+		Stats               map[string]int
 		Total               int
 		CleanCodeFindings   []analyzer.Finding
 		PerformanceFindings []analyzer.Finding
