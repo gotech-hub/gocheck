@@ -40,7 +40,6 @@ import (
 func main() {
     files, _ := scanner.ScanDir("./path/to/your/code")
     findings := analyzer.Analyze(files)
-    // Xử lý findings, ví dụ: in ra màn hình hoặc xuất báo cáo
     for _, f := range findings {
         fmt.Printf("%s:%d %s\n", f.File, f.Line, f.Message)
     }
@@ -53,6 +52,11 @@ Bạn cũng có thể chạy GoCheck trực tiếp từ dòng lệnh:
 ```bash
 go run cmd/gocheck/main.go --path <thư_mục_cần_quét> [--html=true|false] [--json=true|false]
 ```
+
+```bash
+go run cmd/gocheck/main.go --path=. [--html=true|false] [--json=true|false]
+```
+
 - `--path`: Đường dẫn thư mục cần quét (mặc định là thư mục hiện tại)
 - `--html`: Xuất báo cáo HTML (mặc định: true)
 - `--json`: Xuất báo cáo JSON (mặc định: true)
@@ -69,20 +73,6 @@ Sau khi chạy, bạn sẽ nhận được các file `report.html` và/hoặc `r
 ## API chính
 - `scanner.ScanDir(path string) ([]string, error)`: Quét và trả về danh sách file Go trong thư mục.
 - `analyzer.Analyze(files []string) []analyzer.Finding`: Phân tích các file và trả về danh sách findings.
-
-## Cấu trúc dự án
-```
-cmd/gocheck/main.go   // Điểm vào chương trình CLI
-analyzer/             // Phân tích clean code, hiệu năng, bảo mật
-  |- analyzer.go      // Hàm tổng hợp phân tích
-  |- cleancode.go     // Phân tích clean code
-  |- performance.go   // Phân tích hiệu năng
-  |- security.go      // Phân tích bảo mật
-  |- finding.go       // Định nghĩa Finding (output)
-scanner/              // Quét file Go trong thư mục
-report/               // Sinh báo cáo HTML, JSON
-utils/                // Hàm tiện ích
-```
 
 ## Output mẫu
 ```json
