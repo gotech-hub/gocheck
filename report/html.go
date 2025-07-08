@@ -3,7 +3,6 @@ package report
 import (
 	"html/template"
 	"os"
-	"strings"
 
 	"github.com/gotech-hub/gocheck/analyzer"
 )
@@ -31,11 +30,11 @@ func GenerateHTML(findings []analyzer.Finding) {
 	var cleanCodeFindings, performanceFindings, securityFindings []analyzer.Finding
 	for _, f := range findings {
 		// Dựa vào Message để phân loại (theo cách gọi trong analyzer.go)
-		if isCleanCodeFinding(f) {
+		if f.Category == "Clean" {
 			cleanCodeFindings = append(cleanCodeFindings, f)
-		} else if isPerformanceFinding(f) {
+		} else if f.Category == "Performance" {
 			performanceFindings = append(performanceFindings, f)
-		} else if isSecurityFinding(f) {
+		} else if f.Category == "Security" {
 			securityFindings = append(securityFindings, f)
 		}
 	}
@@ -154,28 +153,4 @@ func GenerateHTML(findings []analyzer.Finding) {
 	f, _ := os.Create("report.html")
 	defer f.Close()
 	t.Execute(f, data)
-}
-
-// Thêm các hàm phân loại findings
-func isCleanCodeFinding(f analyzer.Finding) bool {
-	// Có thể dựa vào các từ khóa đặc trưng trong Message
-	// (hoặc tốt hơn: thêm trường Type vào Finding, nhưng tạm thời dùng heuristic)
-	msg := f.Message
-	return containsAny(msg, []string{"function", "variable", "comment", "magic number", "global variable", "nested", "return statement", "if/else", "local variable", "function name", "commented-out code"})
-}
-func isPerformanceFinding(f analyzer.Finding) bool {
-	msg := f.Message
-	return containsAny(msg, []string{"For-loop", "performance", "defer", "goroutine", "string concatenation"})
-}
-func isSecurityFinding(f analyzer.Finding) bool {
-	msg := f.Message
-	return containsAny(msg, []string{"credential", "exec.Command", "ListenAndServe", "hash function", "md5", "sha1", "insecure"})
-}
-func containsAny(s string, subs []string) bool {
-	for _, sub := range subs {
-		if strings.Contains(strings.ToLower(s), strings.ToLower(sub)) {
-			return true
-		}
-	}
-	return false
 }

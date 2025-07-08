@@ -15,4 +15,5 @@ type Finding struct {
 	Message    string   `json:"message"`
 	Severity   Severity `json:"severity"`
 	Suggestion string   `json:"suggestion"`
+	Category   string   `json:"category"` // e.g., "Clean", "Performance", "Security"
 }

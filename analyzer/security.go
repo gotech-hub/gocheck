@@ -33,6 +33,7 @@ func analyzeSecurity(file string) []Finding {
 							Message:    fmt.Sprintf("Hardcoded credential: %s", bl.Value),
 							Severity:   High,
 							Suggestion: "Do not hardcode passwords/API keys. Use environment variables or configuration files instead.",
+							Category:   "Security",
 						})
 					}
 				}
@@ -50,6 +51,7 @@ func analyzeSecurity(file string) []Finding {
 						Message:    "Use of exec.Command detected (possible command injection)",
 						Severity:   High,
 						Suggestion: "Avoid passing unchecked input to exec.Command. Use input validation and sanitization.",
+						Category:   "Security",
 					})
 				}
 			}
@@ -70,6 +72,7 @@ func analyzeSecurity(file string) []Finding {
 									Message:    "Use of http.ListenAndServe on insecure port (:80 or :8080)",
 									Severity:   Medium,
 									Suggestion: "Use HTTPS (443) instead of HTTP (80/8080) for production services.",
+									Category:   "Security",
 								})
 							}
 						}
@@ -90,6 +93,7 @@ func analyzeSecurity(file string) []Finding {
 							Message:    fmt.Sprintf("Use of insecure hash function: %s.New", pkg.Name),
 							Severity:   High,
 							Suggestion: "Do not use md5 or sha1 for security purposes. Use sha256 or stronger algorithms instead.",
+							Category:   "Security",
 						})
 					}
 				}
@@ -111,6 +115,7 @@ func analyzeSecurity(file string) []Finding {
 										Message:    "tls.Config with InsecureSkipVerify: true detected (insecure TLS)",
 										Severity:   Critical,
 										Suggestion: "Never set InsecureSkipVerify to true in production. This disables certificate validation and is highly insecure.",
+										Category:   "Security",
 									})
 								}
 							}
@@ -176,6 +181,7 @@ func runGosec(file string) []Finding {
 			Message:    fmt.Sprintf("[gosec][%s] %s", issue.RuleID, issue.Details),
 			Severity:   sev,
 			Suggestion: issue.Cwe.URL,
+			Category:   "Security",
 		})
 	}
 	return findings

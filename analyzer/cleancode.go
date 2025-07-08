@@ -40,6 +40,7 @@ func AnalyzeCleanCode(file string) []Finding {
 							Message:    fmt.Sprintf("Global variable '%s' should be avoided", name.Name),
 							Severity:   Medium,
 							Suggestion: "Avoid using global variables. Use function parameters or struct fields instead.",
+							Category:   "Clean",
 						})
 					}
 				}
@@ -60,6 +61,7 @@ func AnalyzeCleanCode(file string) []Finding {
 					Message:    fmt.Sprintf("Function %s is too long (%d lines)", fn.Name.Name, len(fn.Body.List)),
 					Severity:   Medium,
 					Suggestion: "Split the function into smaller functions for better readability and testability.",
+					Category:   "Clean",
 				})
 			}
 
@@ -71,6 +73,7 @@ func AnalyzeCleanCode(file string) []Finding {
 					Message:    fmt.Sprintf("Function %s has too many parameters (%d)", fn.Name.Name, len(fn.Type.Params.List)),
 					Severity:   Medium,
 					Suggestion: "Consider grouping parameters or using a struct.",
+					Category:   "Clean",
 				})
 			}
 
@@ -95,6 +98,7 @@ func AnalyzeCleanCode(file string) []Finding {
 					Message:    fmt.Sprintf("Function %s is nested too deeply (%d levels)", fn.Name.Name, maxDepth),
 					Severity:   Medium,
 					Suggestion: "Reduce nesting, split logic into smaller functions.",
+					Category:   "Clean",
 				})
 			}
 
@@ -113,6 +117,7 @@ func AnalyzeCleanCode(file string) []Finding {
 					Message:    fmt.Sprintf("Function %s has too many return statements (%d)", fn.Name.Name, returnCount),
 					Severity:   Low,
 					Suggestion: "Consider simplifying the return flow.",
+					Category:   "Clean",
 				})
 			}
 
@@ -132,6 +137,7 @@ func AnalyzeCleanCode(file string) []Finding {
 					Message:    fmt.Sprintf("Function %s has too many if/else branches (%d)", fn.Name.Name, ifCount),
 					Severity:   Low,
 					Suggestion: "Consider refactoring the conditional logic.",
+					Category:   "Clean",
 				})
 			}
 
@@ -163,6 +169,7 @@ func AnalyzeCleanCode(file string) []Finding {
 					Message:    fmt.Sprintf("Function %s has too many local variables (%d)", fn.Name.Name, localVarCount),
 					Severity:   Low,
 					Suggestion: "Reduce the number of local variables or split logic into smaller functions.",
+					Category:   "Clean",
 				})
 			}
 
@@ -174,6 +181,7 @@ func AnalyzeCleanCode(file string) []Finding {
 					Message:    fmt.Sprintf("Function name '%s' is too short", fn.Name.Name),
 					Severity:   Low,
 					Suggestion: "Use a more descriptive function name.",
+					Category:   "Clean",
 				})
 			}
 
@@ -196,6 +204,7 @@ func AnalyzeCleanCode(file string) []Finding {
 									Message:    fmt.Sprintf("Local variable '%s' declared but not used", ident.Name),
 									Severity:   Low,
 									Suggestion: "Remove unused local variable.",
+									Category:   "Clean",
 								})
 							}
 						}
@@ -214,6 +223,7 @@ func AnalyzeCleanCode(file string) []Finding {
 						Message:    fmt.Sprintf("Nested function '%s' should be avoided", innerFn.Name.Name),
 						Severity:   Medium,
 						Suggestion: "Declare functions at the top level, not inside other functions.",
+						Category:   "Clean",
 					})
 				}
 				return true
@@ -232,6 +242,7 @@ func AnalyzeCleanCode(file string) []Finding {
 								Message:    fmt.Sprintf("Magic number %s detected", lit.Value),
 								Severity:   Low,
 								Suggestion: "Replace magic numbers with named constants.",
+								Category:   "Clean",
 							})
 						}
 					}
@@ -254,6 +265,7 @@ func AnalyzeCleanCode(file string) []Finding {
 					Message:    fmt.Sprintf("Function %s has too many comments (%d)", fn.Name.Name, commentCount),
 					Severity:   Low,
 					Suggestion: "Refactor code to be self-explanatory and reduce excessive comments.",
+					Category:   "Clean",
 				})
 			}
 
@@ -269,6 +281,7 @@ func AnalyzeCleanCode(file string) []Finding {
 								Message:    "Commented-out code detected",
 								Severity:   Low,
 								Suggestion: "Remove commented-out code for better readability.",
+								Category:   "Clean",
 							})
 						}
 					}

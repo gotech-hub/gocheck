@@ -29,6 +29,7 @@ func analyzePerformance(file string) []Finding {
 					Message:    "For-loop detected — review for potential performance impact",
 					Severity:   Low,
 					Suggestion: "Check the loop's exit condition or review for nested loops that may impact performance.",
+					Category:   "Performance",
 				})
 
 				// Rule: defer in loop
@@ -41,6 +42,7 @@ func analyzePerformance(file string) []Finding {
 							Message:    "Use of 'defer' inside a loop can cause performance issues.",
 							Severity:   Medium,
 							Suggestion: "Move 'defer' outside the loop if possible, or consider alternative resource management.",
+							Category:   "Performance",
 						})
 					}
 					return true
@@ -56,6 +58,7 @@ func analyzePerformance(file string) []Finding {
 							Message:    "Launching goroutines inside a loop can cause race conditions or high overhead.",
 							Severity:   Medium,
 							Suggestion: "Consider batching data or using a worker pool instead of launching goroutines inside a loop.",
+							Category:   "Performance",
 						})
 					}
 					return true
@@ -73,6 +76,7 @@ func analyzePerformance(file string) []Finding {
 									Message:    "String concatenation (+=) inside a loop can be slow.",
 									Severity:   Low,
 									Suggestion: "Use strings.Builder for string concatenation inside loops.",
+									Category:   "Performance",
 								})
 							}
 						}
@@ -129,6 +133,7 @@ func runExternalPerformanceAnalyzer(file string) []Finding {
 			Message:    fmt.Sprintf("[staticcheck][%s] %s", issue.Code, issue.Message),
 			Severity:   sev,
 			Suggestion: "Check staticcheck documentation for details.",
+			Category:   "Performance",
 		})
 	}
 	return findings
