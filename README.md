@@ -4,6 +4,8 @@
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 <!-- [![Build Status](https://img.shields.io/github/actions/workflow/status/gotech-hub/gocheck/ci.yml?branch=main)](https://github.com/gotech-hub/gocheck/actions) -->
 
+![Screenshot](https://ibb.co/HLrZWTjy)
+
 > **English below | Tiếng Việt bên dưới**
 
 ---
@@ -126,6 +128,7 @@ func main() {
 ## API chính
 - `scanner.ScanDir(path string) ([]string, error)`: Quét và trả về danh sách file Go trong thư mục.
 - `analyzer.Analyze(files []string) []analyzer.Finding`: Phân tích các file và trả về danh sách findings.
+
 
 ## Đóng góp
 Pull request và issue luôn được chào đón! Nếu bạn muốn đóng góp, hãy tạo PR hoặc issue mới. Đọc thêm ở [CONTRIBUTING.md](CONTRIBUTING.md) nếu có.
